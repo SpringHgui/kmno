@@ -71,7 +71,7 @@ textarea {
                         <button class="button" @click="decode">解密</button>
                     </div>
                     <div>
-                        <button class="button" @click="switch">交换</button>
+                        <button class="button" @click="switchData">交换</button>
                     </div>
                     <div>
                         <button class="button" @click="encode">加密</button>
@@ -115,7 +115,7 @@ export default defineComponent({
         /**
          * 左右交换数据
          */
-        switch() {
+        switchData() {
             var temp = this.rightText
             this.rightText = this.leftText
             this.leftText = temp
