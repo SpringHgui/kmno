@@ -1,3 +1,4 @@
+// @ts-ignore
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routers = createRouter({
