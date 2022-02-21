@@ -64,7 +64,7 @@ textarea {
             <div class="flex-box">
                 <div class="flex-box-item-3">
                     <div>源</div>
-                    <textarea name id cols="30" rows="10" v-model="leftText"></textarea>
+                    <textarea name id cols="0" rows="13" v-model="leftText"></textarea>
                 </div>
                 <div class="flex-box-item center">
                     <div>
@@ -76,10 +76,13 @@ textarea {
                     <div>
                         <button class="button" @click="encode">加密</button>
                     </div>
+                    <div>
+                      <button class="button" @click="clearCode">清空</button>
+                    </div>
                 </div>
                 <div class="flex-box-item-3">
                     <div>结果</div>
-                    <textarea name id cols="30" rows="10" v-model="rightText"></textarea>
+                    <textarea name id cols="30" rows="13" v-model="rightText"></textarea>
                 </div>
             </div>
         </div>
@@ -104,7 +107,8 @@ export default defineComponent({
          * 解码
          */
         decode() {
-            this.rightText = window.atob(this.leftText)
+           //编码的字符串中含有“-”或者“_”、中文乱码问题
+            this.rightText = decodeURIComponent(escape(window.atob(this.leftText).replace(/-/g, "+").replace(/_/g, "/")));
         },
         /**
          * 编码
@@ -119,7 +123,11 @@ export default defineComponent({
             var temp = this.rightText
             this.rightText = this.leftText
             this.leftText = temp
-        }
+        },
+        clearCode() {
+          this.rightText = ''
+          this.leftText = ''
+       }
     }
 })
 </script>
